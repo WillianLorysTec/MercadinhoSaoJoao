@@ -6,15 +6,17 @@ namespace MercadinhoSaoJoao
     {
         static void Main()
         {
-            Console.WriteLine("1 = Selecionar todos os registros com estado ACTIVE\n2 = Selecionar todos os registros\n3 = Inserir dados\n4 = Update por ID");
+            // dentro de cada método criar o retorno para o MAIN()
+            Console.WriteLine("0 = Sair\n1 = Selecionar todos os registros com estado ACTIVE\n2 = Selecionar todos os registros\n3 = Inserir dados\n4 = Update por ID\n5 = Delete por ID");
             Console.Write("DIGITE A OPÇÃO DESEJADA: ");
             int opcao = int.Parse(Console.ReadLine());
             Console.Clear();
-
-            do
-            {
+            
                 switch (opcao)
                 {
+                    case 0:
+                        System.Environment.Exit(0);
+                        break;
                     case 1:
                         var selectallconnectionactive = new SelectAllActiveConnection();
                         selectallconnectionactive.SelectAllActive();
@@ -40,9 +42,9 @@ namespace MercadinhoSaoJoao
                         Main();
                         break;
 
-                }
+                
             }
-            while (Console.ReadKey().Key != ConsoleKey.Escape);
+            
             
         }
 
