@@ -30,22 +30,30 @@ namespace MercadinhoSaoJoao.DataSql
             int id = int.Parse(Console.ReadLine());
             clientes.Id = id;
 
-            using (SqlConnection connection = new SqlConnection(stringconnection))
+            try
             {
-                connection.Open();
-
-               var rows = connection.Execute(SqlUpdate, new
+                using (SqlConnection connection = new SqlConnection(stringconnection))
                 {
-                    clientes.Name,
-                    clientes.Telephone,
-                    clientes.RG,
-                    clientes.CPF,
-                    clientes.Active,
-                    clientes.Id
+                    connection.Open();
 
-                });
+                    var rows = connection.Execute(SqlUpdate, new
+                    {
+                        clientes.Name,
+                        clientes.Telephone,
+                        clientes.RG,
+                        clientes.CPF,
+                        clientes.Active,
+                        clientes.Id
 
-                Console.WriteLine($"{rows} linhas afetadas");
+                    });
+
+                    Console.WriteLine($"{rows} linhas afetadas");
+                }
+            }
+            catch (Exception e)
+            {
+
+                Console.WriteLine(e.Message);
             }
         }
 

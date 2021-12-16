@@ -20,16 +20,24 @@ namespace MercadinhoSaoJoao.DataSql
             Console.Write("Digite o ID para REMOVER: ");
             int id = int.Parse(Console.ReadLine());
 
-            using (SqlConnection connection = new SqlConnection()) 
+            try
             {
-                connection.Open();
-
-                var rows = connection.Execute(SqlDelete, new
+                using (SqlConnection connection = new SqlConnection())
                 {
-                    @id = id
-                });
+                    connection.Open();
 
-                Console.WriteLine($"{rows} registros afetados");
+                    var rows = connection.Execute(SqlDelete, new
+                    {
+                        @id = id
+                    });
+
+                    Console.WriteLine($"{rows} registros afetados");
+                }
+            }
+            catch (Exception e)
+            {
+
+                Console.WriteLine(e.Message);
             }
         }
     }

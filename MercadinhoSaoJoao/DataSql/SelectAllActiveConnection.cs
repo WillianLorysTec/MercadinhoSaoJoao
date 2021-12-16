@@ -13,18 +13,26 @@ namespace MercadinhoSaoJoao.DataSql
             const string stringconnection = "Server=localhost;Database=MercadinhoSJ;Trusted_Connection=True;";
             var SqlSelectAllActive = @"SELECT * FROM [Cliente] WHERE [Active] = 1";
 
-            using (SqlConnection connection = new SqlConnection(stringconnection))
+            try
             {
-                connection.Open();
-
-                var reader = connection.Query<Cliente>(SqlSelectAllActive);
-
-                foreach (var item in reader)
+                using (SqlConnection connection = new SqlConnection(stringconnection))
                 {
-                    Console.WriteLine($"{item.Id}, {item.Name}, {item.Telephone}, {item.RG}, {item.CPF}, {item.Active}");
-                }
+                    connection.Open();
 
-            };
+                    var reader = connection.Query<Cliente>(SqlSelectAllActive);
+
+                    foreach (var item in reader)
+                    {
+                        Console.WriteLine($"{item.Id}, {item.Name}, {item.Telephone}, {item.RG}, {item.CPF}, {item.Active}");
+                    }
+
+                };
+            }
+            catch (Exception e)
+            {
+
+                Console.WriteLine(e.Message);
+            }
             
         }
     }

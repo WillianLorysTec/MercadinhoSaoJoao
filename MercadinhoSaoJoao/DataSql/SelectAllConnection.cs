@@ -11,15 +11,23 @@ namespace MercadinhoSaoJoao.DataSql
 
         public void SelectAll()
         {
-            using (SqlConnection connection = new SqlConnection(stringconnection)) 
+            try
             {
-                connection.Open();
-                var reader = connection.Query<Cliente>(SqlSelectAll);
-
-                foreach (var item in reader)
+                using (SqlConnection connection = new SqlConnection(stringconnection))
                 {
-                    Console.WriteLine($"{item.Id}, {item.Name}, {item.Telephone}, {item.RG}, {item.CPF}, {item.Active}");
+                    connection.Open();
+                    var reader = connection.Query<Cliente>(SqlSelectAll);
+
+                    foreach (var item in reader)
+                    {
+                        Console.WriteLine($"{item.Id}, {item.Name}, {item.Telephone}, {item.RG}, {item.CPF}, {item.Active}");
+                    }
                 }
+            }
+            catch (Exception e)
+            {
+
+                Console.WriteLine(e.Message);
             }
         }
         

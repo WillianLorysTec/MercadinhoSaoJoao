@@ -26,20 +26,28 @@ namespace MercadinhoSaoJoao.DataSql
             clientes.CPF = "2167555755";
             clientes.Active = true;
 
-            using (SqlConnection connection = new SqlConnection(stringconnection))
+            try
             {
-                connection.Open();
-
-                var rows = connection.Execute(SqlInsert, new
+                using (SqlConnection connection = new SqlConnection(stringconnection))
                 {
-                    clientes.Name,
-                    clientes.Telephone,
-                    clientes.RG,
-                    clientes.CPF,
-                    clientes.Active
+                    connection.Open();
 
-                });
-                Console.WriteLine($"{rows} registros afetados");
+                    var rows = connection.Execute(SqlInsert, new
+                    {
+                        clientes.Name,
+                        clientes.Telephone,
+                        clientes.RG,
+                        clientes.CPF,
+                        clientes.Active
+
+                    });
+                    Console.WriteLine($"{rows} registros afetados");
+                }
+            }
+            catch (Exception e)
+            {
+
+                Console.WriteLine(e.Message);
             }
             
         }
